@@ -18,10 +18,15 @@ const Main = props => {
                         onSelectPlace={(lat, lon) => {}}
                         places={[
                             {
-                            name: 'Romania',
-                            location: [45.648886, 25.593741],
-                            color: 'red',
-                            onClick: (name) => {},
+                                name: 'Romania',
+                                location: [45.648886, 25.593741],
+                                color: 'red',
+                                onClick: (name) => {},
+                            },{
+                                name: 'Switzerland',
+                                location: [46.198787, 6.141170],
+                                color: 'pink',
+                                onClick: (name) => {},
                             },
                         ]}
                         selectColor="blue"
