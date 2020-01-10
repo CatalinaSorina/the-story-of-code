@@ -5,8 +5,26 @@ import Main from "./components/Main";
 import {Grommet} from "grommet";
 
 function App() {
+  const theme={ 
+    global: { 
+      colors: { olive: '#12463C', lightOlive: '#237364' }
+    },
+    tab: {
+      color: "lightOlive",
+      border: {
+        color:"lightOlive"
+      }
+    },
+    worldMap: {
+      extend:{
+        width:"80vw",
+        height:"80vh"
+      }
+    }
+  };
+
   return (
-    <Grommet className="App" full={true} theme={{ global: { colors: { olive: '#12463C', lightOlive: '#237364' }}, }}>
+    <Grommet className="App" full={true} theme={theme}>
         <Title title="Cod...ing" bg="lightOlive" borderColor="olive" textColor="darkorange" />
         <Main />
     </Grommet>

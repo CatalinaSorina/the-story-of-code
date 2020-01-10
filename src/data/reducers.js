@@ -1,29 +1,27 @@
+import * as actions from "./actions";
+
 const initialState = {
-    programmingLang: [
-        {
-            name: "HTML",
-            inventor: "Tim Berners-Lee",
-            region: "Europe",
-            country: "Switzerland",
-            town: "Geneva",
-            year: "1989"
-        },
-        {
-            name: "CSS",
-            inventor: "Håkon Wium Lie",
-            region: "Europe",
-            country: "Switzerland",
-            town: "Geneva",
-            year: "1994"
-        },
-        {
-            name: "JavaScript",
-            inventor: "Brendan Eich",
-            region: "USA",
-            country: "Virginia",
-            town: "Duelles",
-            year: "1995"
-        }
-    ]
+    loading:false,
+    error: null
 };
   
+const rootReducer = (state = initialState, action) => {
+    switch(action.type){
+        case actions.LOADING:
+            return{
+                ...state,
+                loading: true,
+                error: null
+            }
+        case actions.ERROR_MESSAGE:
+            return{
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
+export default rootReducer;

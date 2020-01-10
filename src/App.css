@@ -22,3 +22,7 @@ font-family: 'Nosifer', cursive; */
 .App-link {
   color: #61dafb;
 }
+
+::selection {
+  color: inherit;
+}
