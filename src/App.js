@@ -20,6 +20,9 @@ function App() {
         width:"80vw",
         height:"80vh"
       }
+    },
+    checkBox: {
+      color: "black"
     }
   };
 

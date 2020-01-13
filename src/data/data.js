@@ -146,5 +146,58 @@ export default {
             location: [38.899611, -77.263742],
             color: 'pink'
         },
+    ],
+
+    questions: [
+        {
+            question: "What programming language is the oldest one?",
+            answers: [
+                "Assembly",
+                "HTML",
+                "Cobol",
+                "Fortrand"
+            ],
+            correctAnswer: "Assembly"
+        },
+        {
+            question: "What is a piece of code that you can easily call over and over again?",
+            answers: [
+                "Iteration",
+                "Loop",
+                "Block",
+                "Function"
+            ],
+            correctAnswer: "Function"
+        },
+        {
+            question: "Mental processes and strategies that include: decomposition, pattern matching, abstraction, algorithms (decomposing problems into smaller, more manageable problems, finding repeating patterns, abstracting specific differences to make one solution work for multiple problems, and creating step-by-step algorithms).",
+            answers: [
+                "Logical dissection",
+                "Computational thinking",
+                "Linear patterns",
+                "Hierarchical thinking"
+            ],
+            correctAnswer: "Computational thinking"
+        },
+        {
+            question: "Trying again and again, even when something is very hard.",
+            answers: [
+                "Persistence",
+                "Fighting",
+                "Adversity",
+                "Determination"
+            ],
+            correctAnswer: "Persistence"
+        },
+        {
+            question: "What cause the computer to execute the commands you've written in your program?",
+            answers: [
+                "Debug",
+                "Run",
+                "Execute",
+                "Process"
+            ],
+            correctAnswer: "Run"
+        }
     ]
 }
