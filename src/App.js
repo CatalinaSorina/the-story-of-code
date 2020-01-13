@@ -3,6 +3,7 @@ import './App.css';
 import Title from "./components/Title";
 import Main from "./components/Main";
 import {Grommet} from "grommet";
+import {Apps} from "grommet-icons";
 
 function App() {
   const theme={ 
@@ -22,7 +23,10 @@ function App() {
       }
     },
     checkBox: {
-      color: "black"
+      color: "black",
+      icons: {
+        checked:Apps
+      }
     }
   };
 
