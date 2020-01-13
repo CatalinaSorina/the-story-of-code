@@ -1,5 +1,5 @@
 import React from "react";
-import {WorldMap,Box} from "grommet";
+import {WorldMap,Box,Button} from "grommet";
 import data from "../data/data";
 
 class TabMap extends React.Component {
@@ -10,18 +10,17 @@ class TabMap extends React.Component {
 
     removePlace = (coordinates) => {
         console.log("remove:",coordinates);
-        let places=this.state.places.filter(place=>place.location!==coordinates);
+        let places=this.state.places.filter(place=>place.name!=="Selected area");
         this.setState({places:places});
     }
 
     selectPlace = (coordinates) => {
         let places=this.state.places;
-        const place={
+        places[places.length-1].name==="Selected area"?places[places.length-1].location=coordinates:places.push({
             name:"Selected area",
             location:coordinates,
             color:"blue"
-        };
-        places[places.length-1].name==="Selected area"?places[places.length-1].location=coordinates:places.push(place);
+        });
         this.setState({places:places})
     }
 
@@ -34,6 +33,7 @@ class TabMap extends React.Component {
                     onSelectPlace={this.selectPlace}
                     places={this.state.places}
                 />
+                <Button color="transparent" alignSelf="center" label="Remove selection" onClick={this.removePlace} />
             </Box>
         )
     }
