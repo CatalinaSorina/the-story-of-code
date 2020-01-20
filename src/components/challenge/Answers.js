@@ -1,7 +1,7 @@
 import React from "react";
 import {CheckBox} from "grommet"
 
-const Answers = ({answers,answerQuestion}) => {
+const Answers = ({answers,answerQuestion,disabled}) => {
     const [keyAnswer, setKeyAnswer] = React.useState();
 
     const answerQuestionChanged = (event) => {
@@ -17,7 +17,15 @@ const Answers = ({answers,answerQuestion}) => {
     return(
         <>
             {answers.map((answer,i)=>(
-                <CheckBox className="answer" key={i} id={`Answer${i}`} label={answer} value={answer} onChange={answerQuestionChanged} checked={keyAnswer===`Answer${i}`}/>
+                <CheckBox 
+                    className="answer" 
+                    key={i} id={`Answer${i}`} 
+                    label={answer} 
+                    value={answer} 
+                    onChange={answerQuestionChanged} 
+                    checked={keyAnswer===`Answer${i}`}
+                    disabled={disabled}
+                />
             ))}
         </>
     )
