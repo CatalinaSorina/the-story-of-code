@@ -19,7 +19,7 @@ function App() {
     worldMap: {
       extend:{
         width:"80vw",
-        height:"80vh"
+        height:"70vh"
       }
     },
     checkBox: {
