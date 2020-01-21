@@ -1,15 +1,21 @@
 import React from "react";
 import {WorldMap,Box,Button} from "grommet";
 import data from "../data/data";
+import {changePoints} from "../data/actions";
+import {connect} from "react-redux";
 
 class TabMap extends React.Component {
-    state={
-        continents:data.continents,
-        places:data.places,
-        question:"",
-        answer:"",
-        points:0
+    constructor(props) {
+        super(props);
+        this.state={
+            continents:[],
+            places:[],
+            question:"",
+            answer:""
+        };
     }
+    
+    componentDidMount = () => this.setState({continents:data.continents,places:data.places});
 
     removePlace = () => {
         let places=this.state.places.filter(place=>place.name!=="Selected area");
@@ -26,14 +32,12 @@ class TabMap extends React.Component {
         this.setState({places:places,question:""});
     }
 
-    typeAnswer = e => {
-        this.setState({answer:e.target.value});
-    }
+    typeAnswer = e => this.setState({answer:e.target.value});
 
     submitAnswer = () => {
         let codeName=this.state.question.split("I'm ")[1].split(",")[0];
         if(codeName==="HTML+CSS") codeName="HTML";
-        let points=this.state.points;
+        let points=this.props.points;
         let answerUpper=this.state.answer.toUpperCase();
         data.codeLanguage.map(codeType=>{
             if(codeName===codeType.code){
@@ -49,7 +53,8 @@ class TabMap extends React.Component {
             }
             return points;
         })
-        this.setState({points:points,question:""});
+        this.props.changePoints(points);
+        this.removePlace();
     }
 
     placeAction = placeName => this.setState({question:`I'm ${placeName}, where was I born?`});
@@ -77,4 +82,6 @@ class TabMap extends React.Component {
     }
 }
 
-export default TabMap;
+const mapStateToProps = state => ({points:state.points});
+
+export default connect(mapStateToProps,{changePoints})(TabMap);

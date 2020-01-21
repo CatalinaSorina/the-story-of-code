@@ -1,12 +1,18 @@
 import * as actions from "./actions";
 
 const initialState = {
+    points:0,
     loading:false,
     error: null
 };
   
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
+        case actions.CHANGE_POINTS:
+            return{
+                ...state,
+                points: action.payload
+            }
         case actions.LOADING:
             return{
                 ...state,
