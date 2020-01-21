@@ -16,6 +16,20 @@
     font-weight: normal;
 }
 
+@media only screen and (max-width: 500px) {
+    .challenge {
+        width:90vw;
+        padding:0.4rem;
+        margin:0.2rem;
+        font-family: 'Raleway', sans-serif;
+        font-size:0.8rem;
+    }
+    .question {
+        font-family:'Itim', cursive;
+        font-size:1rem;
+    }
+}
+
 .success {
     background:rgba(35, 99, 38,0.4);
 }

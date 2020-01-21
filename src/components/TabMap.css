@@ -1,0 +1,27 @@
+.mapQuestion {
+    padding:1rem;
+}
+
+.answerInput {
+    font:inherit;
+    padding:0.2rem;
+    margin:0.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .mapHolder {
+        width:90vw;
+        height:20rem;
+        overflow: auto;
+    }
+    .map {
+        width:55rem;
+    }
+    .mapQuestion {
+       padding: 0.1rem;
+       font-size: 0.8rem;
+    }
+    .answerInput {
+      font-size: 0.8rem;
+    }
+}

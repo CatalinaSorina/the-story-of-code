@@ -18,7 +18,7 @@ function App() {
     },
     worldMap: {
       extend:{
-        width:"80vw",
+        width:"70vw",
         height:"70vh"
       }
     },

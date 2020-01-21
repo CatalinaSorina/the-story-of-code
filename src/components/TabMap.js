@@ -4,6 +4,7 @@ import data from "../data/data";
 import { addPoints,removePoints } from "../data/actions";
 import { connect } from "react-redux";
 import ShowPoints from "./ShowPoints";
+import "./TabMap.css";
 
 class TabMap extends React.Component {
     constructor(props) {
@@ -81,27 +82,28 @@ class TabMap extends React.Component {
 
     render(){
         return (
-            <Box margin='small' pad='small'>
-                <ShowPoints showPoints={this.state.showPoints} 
-                    onClose={()=>this.setState({showPoints:false})}
-                    alertStyle={this.state.alertStyle}
-                    points={this.state.points}
-                />
-                <WorldMap
+            <Box margin='small' pad='small' alignContent="center">
+                <div className="mapHolder"><WorldMap
+                    className="map"
                     color="rgba(255,255,255,0.1)"
                     continents={this.state.continents.map(continent=>continent)}
                     onSelectPlace={this.selectPlace}
                     places={this.state.places.map(place=>{
                         return {...place,onClick:this.placeAction}
                     })}
-                />
-                {this.state.question!=="" && <div style={{padding:"1rem"}}>
+                /></div>
+                {this.state.question!=="" && <div className="mapQuestion">
                         {this.state.question}
-                        <input style={{font:"inherit",padding:"0.2rem",margin:"0.5rem"}} onChange={this.typeAnswer}/>
+                        <input className="answerInput" onChange={this.typeAnswer}/>
                         <Button color="blue" type="submit" label="submit" onClick={this.submitAnswer}/>
                     </div>
                 }
                 <Button color="transparent" alignSelf="center" label="Remove selection" onClick={this.removePlace} />
+                <ShowPoints showPoints={this.state.showPoints} 
+                    onClose={()=>this.setState({showPoints:false})}
+                    alertStyle={this.state.alertStyle}
+                    points={this.state.points}
+                />
             </Box>
         )
     }
