@@ -1,8 +1,9 @@
 import React from "react";
-import {WorldMap,Box,Button} from "grommet";
+import { WorldMap,Box,Button } from "grommet";
 import data from "../data/data";
-import {changePoints} from "../data/actions";
-import {connect} from "react-redux";
+import { addPoints,removePoints } from "../data/actions";
+import { connect } from "react-redux";
+import ShowPoints from "./ShowPoints";
 
 class TabMap extends React.Component {
     constructor(props) {
@@ -11,7 +12,10 @@ class TabMap extends React.Component {
             continents:[],
             places:[],
             question:"",
-            answer:""
+            answer:"",
+            points:0,
+            showPoints:false,
+            alertStyle:"info"
         };
     }
     
@@ -35,26 +39,42 @@ class TabMap extends React.Component {
     typeAnswer = e => this.setState({answer:e.target.value});
 
     submitAnswer = () => {
+        //===GET CODE NAME FROM QUESTION===\\
         let codeName=this.state.question.split("I'm ")[1].split(",")[0];
+        //===CHANGE IF HTML+CSS (SAME LOCATION)===\\
         if(codeName==="HTML+CSS") codeName="HTML";
-        let points=this.props.points;
+        //===SET VARIABLES===\\
+        let points=this.state.points;
         let answerUpper=this.state.answer.toUpperCase();
+        let alertStyle="info";
+        const pagePointsType="map";
+        const correct="success";
+        const incorrect="error";
+        //===CHECK ANSWER===\\
         data.codeLanguage.map(codeType=>{
             if(codeName===codeType.code){
                 if(answerUpper===codeType.town.toUpperCase()){
                     points+=10;
+                    alertStyle=correct;
+                    this.props.addPoints(10,pagePointsType);
                 }else if(answerUpper===codeType.state.toUpperCase()){
                     points+=5;
+                    alertStyle=correct;
+                    this.props.addPoints(5,pagePointsType);
                 }else if(answerUpper===codeType.region.toUpperCase()){
                     points+=1;
+                    alertStyle=correct;
+                    this.props.addPoints(1,pagePointsType);
                 }else{
                     points-=5;
+                    alertStyle=incorrect;
+                    this.props.removePoints(5,pagePointsType);
                 }
             }
             return points;
-        })
-        this.props.changePoints(points);
-        this.removePlace();
+        });
+        //===SHOW RESULT===\\
+        this.setState({question:"",points:points,showPoints:true,alertStyle:alertStyle});
     }
 
     placeAction = placeName => this.setState({question:`I'm ${placeName}, where was I born?`});
@@ -62,6 +82,11 @@ class TabMap extends React.Component {
     render(){
         return (
             <Box margin='small' pad='small'>
+                <ShowPoints showPoints={this.state.showPoints} 
+                    onClose={()=>this.setState({showPoints:false})}
+                    alertStyle={this.state.alertStyle}
+                    points={this.state.points}
+                />
                 <WorldMap
                     color="rgba(255,255,255,0.1)"
                     continents={this.state.continents.map(continent=>continent)}
@@ -84,4 +109,4 @@ class TabMap extends React.Component {
 
 const mapStateToProps = state => ({points:state.points});
 
-export default connect(mapStateToProps,{changePoints})(TabMap);
+export default connect(mapStateToProps,{addPoints,removePoints})(TabMap);

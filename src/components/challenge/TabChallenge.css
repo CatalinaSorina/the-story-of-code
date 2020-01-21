@@ -16,11 +16,11 @@
     font-weight: normal;
 }
 
-.correct {
+.success {
     background:rgba(35, 99, 38,0.4);
 }
 
-.incorrect {
+.error {
     background:rgba(124, 23, 23,0.4);
 }
 

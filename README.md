@@ -20,4 +20,9 @@ npm install grommet grommet-icons styled-components --save
 
 npm i react-typing-effect 
 
+npm install @material-ui/core  
+
+npm install @material-ui/lab  
+
+
 Enjoy ^_^
