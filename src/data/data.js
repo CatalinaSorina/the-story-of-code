@@ -97,14 +97,6 @@ export default {
             coordinates: [46.7016,22.7868],
             year: "2007",
             color: "red"
-        },
-        {
-            code: "D",
-            inventor: "Walter Bright",
-            region: "USA",
-            state: "Virginia",
-            town: "Vienna",
-            year: "2007"
         }
     ],
 
@@ -140,11 +132,7 @@ export default {
         },{
             name: 'D',
             location: [44.425205, 26.103212],
-            color: 'red'
-        },{
-            name: 'D',
-            location: [38.899611, -77.263742],
-            color: 'pink'
+            color: 'crimson'
         },
     ],
 

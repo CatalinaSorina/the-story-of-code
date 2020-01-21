@@ -7,7 +7,8 @@ class TabMap extends React.Component {
         continents:data.continents,
         places:data.places,
         question:"",
-        answer:""
+        answer:"",
+        points:0
     }
 
     removePlace = () => {
@@ -26,12 +27,29 @@ class TabMap extends React.Component {
     }
 
     typeAnswer = e => {
-        console.log(e.target.value);
         this.setState({answer:e.target.value});
     }
 
     submitAnswer = () => {
-        this.removePlace();
+        let codeName=this.state.question.split("I'm ")[1].split(",")[0];
+        if(codeName==="HTML+CSS") codeName="HTML";
+        let points=this.state.points;
+        let answerUpper=this.state.answer.toUpperCase();
+        data.codeLanguage.map(codeType=>{
+            if(codeName===codeType.code){
+                if(answerUpper===codeType.town.toUpperCase()){
+                    points+=10;
+                }else if(answerUpper===codeType.state.toUpperCase()){
+                    points+=5;
+                }else if(answerUpper===codeType.region.toUpperCase()){
+                    points+=1;
+                }else{
+                    points-=5;
+                }
+            }
+            return points;
+        })
+        this.setState({points:points,question:""});
     }
 
     placeAction = placeName => this.setState({question:`I'm ${placeName}, where was I born?`});
