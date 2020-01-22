@@ -8,7 +8,7 @@ import {Apps} from "grommet-icons";
 function App() {
   const theme={ 
     global: { 
-      colors: { olive: '#12463C', lightOlive: '#237364' }
+      colors: { olive: '#12463C', lightOlive: '#237364' },
     },
     tab: {
       color: "lightOlive",
@@ -26,6 +26,11 @@ function App() {
       color: "black",
       icons: {
         checked:Apps
+      }
+    },
+    select: {
+      icons: {
+        color: "#FDDF03"
       }
     }
   };
