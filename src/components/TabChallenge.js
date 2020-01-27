@@ -19,6 +19,7 @@ class TabChallenge extends React.Component {
             style:"",
             number:0,
             points:0,
+            questionPoints:0,
             showPoints:false
         }
     }
@@ -29,8 +30,6 @@ class TabChallenge extends React.Component {
 
     shuffle = (array) => array.map(index => [Math.random(), index]).sort(([a], [b]) => a - b).map(([_, index]) => index);
 
-    checkMarkAnswer = (answer) => answer===this.state.answer;
-
     answerQuestion = (answer) => this.setState({answer:answer});
 
     submitAnswer = e => {
@@ -39,20 +38,23 @@ class TabChallenge extends React.Component {
         if(button.textContent==="submit"){
             //===SET VARIABLES===\\
             let points=this.state.points;
+            let questionPoints;
             let style="";
             const pagePointsType="challenge";
             //===CHECK ANSWER===\\
             if(this.state.answer===this.state.correctAnswer){
                 style="success";
                 points+=5;
+                questionPoints=5;
                 this.props.addPoints(5,pagePointsType);
             }else{
                 style="error";
                 points-=5;
+                questionPoints=-5;
                 this.props.removePoints(5,pagePointsType);
             }
             //===SHOW RESULT===\\
-            this.setState({style:style,points:points,showPoints:true});
+            this.setState({style:style,points:points,questionPoints:questionPoints,showPoints:true});
             //===CHECK FOR MORE QUESTIONS===\\
             if(this.state.number===data.questions.length){
                 button.textContent="no more";
@@ -61,9 +63,8 @@ class TabChallenge extends React.Component {
                 button.textContent="want more";
             }
         }else{
-            this.setState({answer:""});
-            this.getQuestion();
             button.textContent="submit";
+            this.getQuestion();
         }
     }
 
@@ -72,6 +73,7 @@ class TabChallenge extends React.Component {
         this.setState({
             question:questionHit.question,
             answers:this.shuffle(questionHit.answers),
+            answer:"",
             correctAnswer:questionHit.correctAnswer,
             style:"",
             number:this.state.number+1
@@ -82,12 +84,13 @@ class TabChallenge extends React.Component {
         return (
             <div className={`${this.state.style} challenge`}>
                 <Question question={this.state.question} style={this.state.style} num={this.state.number}/>
-                <Answers answers={this.state.answers} answerQuestion={this.answerQuestion} checked={this.checkMarkAnswer} disabled={this.state.answer!==""}/>
+                <Answers answers={this.state.answers} answerQuestion={this.answerQuestion} answeredQuestion={this.state.answer} disabled={this.state.answer!==""}/>
                 <Button className="submitButton" label="submit" color="white" onClick={this.submitAnswer} />
                 <ShowPoints showPoints={this.state.showPoints} 
                     onClose={()=>this.setState({showPoints:false})}
                     alertStyle={this.state.style}
                     points={this.state.points}
+                    questionPoints={this.state.questionPoints}
                 />
             </div>
         )

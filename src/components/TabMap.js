@@ -15,6 +15,7 @@ class TabMap extends React.Component {
             question:"",
             answer:"",
             points:0,
+            questionPoints:0,
             showPoints:false,
             alertStyle:"info"
         };
@@ -48,6 +49,7 @@ class TabMap extends React.Component {
         if(codeName==="HTML+CSS") codeName="HTML";
         //===SET VARIABLES===\\
         let points=this.state.points;
+        let questionPoints;
         let answerUpper=this.state.answer.toUpperCase();
         let alertStyle="info";
         const pagePointsType="map";
@@ -58,18 +60,22 @@ class TabMap extends React.Component {
             if(codeName===codeType.code){
                 if(answerUpper===codeType.town.toUpperCase()){
                     points+=10;
+                    questionPoints=10;
                     alertStyle=correct;
                     this.props.addPoints(10,pagePointsType);
                 }else if(answerUpper===codeType.state.toUpperCase()){
                     points+=5;
+                    questionPoints=5;
                     alertStyle=correct;
                     this.props.addPoints(5,pagePointsType);
                 }else if(answerUpper===codeType.region.toUpperCase()){
                     points+=1;
+                    questionPoints=1;
                     alertStyle=correct;
                     this.props.addPoints(1,pagePointsType);
                 }else{
                     points-=5;
+                    questionPoints=-5;
                     alertStyle=incorrect;
                     this.props.removePoints(5,pagePointsType);
                 }
@@ -77,7 +83,7 @@ class TabMap extends React.Component {
             return points;
         });
         //===SHOW RESULT===\\
-        this.setState({question:"",points:points,showPoints:true,alertStyle:alertStyle});
+        this.setState({question:"",points:points,questionPoints:questionPoints,showPoints:true,alertStyle:alertStyle});
     }
 
     placeAction = placeName => {
@@ -111,6 +117,7 @@ class TabMap extends React.Component {
                     onClose={()=>this.setState({showPoints:false})}
                     alertStyle={this.state.alertStyle}
                     points={this.state.points}
+                    questionPoints={this.state.questionPoints}
                 />
             </Box>
         )

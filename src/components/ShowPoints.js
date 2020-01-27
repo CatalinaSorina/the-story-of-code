@@ -8,11 +8,12 @@ const ShowPoints = props => {
             autoHideDuration={1000} 
             transitionDuration={100}
             onClose={props.onClose}
-        >
+        ><div>
             <Alert severity={props.alertStyle}>
-                Points: {props.points}
+                Points: {props.questionPoints}
             </Alert>
-        </Snackbar>
+            <p>Score: {props.points}</p>
+        </div></Snackbar>
     )
 }
 
