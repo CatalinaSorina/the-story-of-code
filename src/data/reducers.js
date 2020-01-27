@@ -7,7 +7,8 @@ const initialState = {
     money:0,
     currency:1,
     currencyType:"USD",
-    error: null
+    error: null,
+    selectedArea:null
 };
   
 const rootReducer = (state = initialState, action) => {
@@ -43,6 +44,13 @@ const rootReducer = (state = initialState, action) => {
                 loading: false,
                 money: (state.points*action.payload),
                 currency: action.payload,
+                error: null
+            }
+        case actions.SET_SELECTED_AREA:
+            return{
+                ...state,
+                loading: false,
+                selectedArea: action.payload,
                 error: null
             }
         case actions.ERROR_MESSAGE:

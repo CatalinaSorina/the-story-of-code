@@ -1,7 +1,7 @@
 import React from "react";
 import { WorldMap,Box,Button,TextInput,Text } from "grommet";
 import data from "../data/data";
-import { addPoints,removePoints } from "../data/actions";
+import { addPoints,removePoints,makeLocation } from "../data/actions";
 import { connect } from "react-redux";
 import ShowPoints from "./ShowPoints";
 import "./TabMap.css";
@@ -24,7 +24,8 @@ class TabMap extends React.Component {
 
     removePlace = () => {
         let places=this.state.places.filter(place=>place.name!=="Selected area");
-        this.setState({places:places,question:""});
+        this.setState({places:places,question:"",selectedArea:""});
+        this.props.makeLocation(0);
     }
 
     selectPlace = (coordinates) => {
@@ -34,6 +35,7 @@ class TabMap extends React.Component {
             location:coordinates,
             color:"blue"
         });
+        this.props.makeLocation(coordinates);
         this.setState({places:places,question:""});
     }
 
@@ -78,9 +80,13 @@ class TabMap extends React.Component {
         this.setState({question:"",points:points,showPoints:true,alertStyle:alertStyle});
     }
 
-    placeAction = placeName => this.setState({question:`I'm ${placeName}, where was I born?`});
+    placeAction = placeName => {
+        this.removePlace();
+        this.setState({question:`I'm ${placeName}, where was I born?`});
+    }
 
     render(){
+        const places=this.state.places;
         return (
             <Box margin='small' pad='small' alignContent="center">
                 <div className="mapHolder"><WorldMap
@@ -88,17 +94,19 @@ class TabMap extends React.Component {
                     color="rgba(255,255,255,0.1)"
                     continents={this.state.continents.map(continent=>continent)}
                     onSelectPlace={this.selectPlace}
-                    places={this.state.places.map(place=>{
+                    places={places.map(place=>{
                         return {...place,onClick:this.placeAction}
                     })}
                 /></div>
                 {this.state.question!=="" && <div className="mapQuestion">
-                        <Text className="questionMap">{this.state.question}</Text>
-                        <TextInput className="answerInput" placeholder="type here" onChange={this.typeAnswer}/>
-                        <Button className="submitMap" color="blue" type="submit" label="submit" onClick={this.submitAnswer}/>
-                    </div>
-                }
-                <Button color="transparent" alignSelf="center" label="Remove selection" onClick={this.removePlace} />
+                    <Text className="questionMap">{this.state.question}</Text>
+                    <TextInput className="answerInput" placeholder="type here" onChange={this.typeAnswer}/>
+                    <Button className="submitMap" color="blue" type="submit" label="submit" onClick={this.submitAnswer}/>
+                </div>}
+                {this.props.selectedArea && <>
+                    <Text>{this.props.selectedArea}</Text>
+                    <Button color="transparent" alignSelf="center" label="Remove selection" onClick={this.removePlace} />
+                </>}
                 <ShowPoints showPoints={this.state.showPoints} 
                     onClose={()=>this.setState({showPoints:false})}
                     alertStyle={this.state.alertStyle}
@@ -109,6 +117,6 @@ class TabMap extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({points:state.points});
+const mapStateToProps = state => ({points:state.points,selectedArea:state.selectedArea});
 
-export default connect(mapStateToProps,{addPoints,removePoints})(TabMap);
+export default connect(mapStateToProps,{addPoints,removePoints,makeLocation})(TabMap);
