@@ -1,14 +1,32 @@
 .mapQuestion {
     padding:1rem;
+    display:flex;
+    align-self:center;
+    align-items:center;
+    justify-content:center;
+}
+
+.questionMap {
+    font:inherit;
+    min-width:22rem;
+    border-radius:1rem;
+    text-align: right;
 }
 
 .answerInput {
     font:inherit;
     padding:0.2rem;
     margin:0.5rem;
+    width:12rem;
+    background:white;
+    text-align:center;
 }
 
-@media only screen and (max-width: 500px) {
+.submitMap {
+    font:inherit;
+}
+
+@media only screen and (max-width: 670px) {
     .mapHolder {
         width:90vw;
         height:20rem;
@@ -18,10 +36,14 @@
         width:55rem;
     }
     .mapQuestion {
-       padding: 0.1rem;
-       font-size: 0.8rem;
+       padding:0.05rem;
+       font-size:0.8rem;
+       flex-direction:column;
     }
-    .answerInput {
-      font-size: 0.8rem;
+    .questionMap {
+        text-align: center;
+    }
+    .submitMap {
+        padding:0 0.3rem;
     }
 }

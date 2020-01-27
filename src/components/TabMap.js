@@ -1,5 +1,5 @@
 import React from "react";
-import { WorldMap,Box,Button } from "grommet";
+import { WorldMap,Box,Button,TextInput,Text } from "grommet";
 import data from "../data/data";
 import { addPoints,removePoints } from "../data/actions";
 import { connect } from "react-redux";
@@ -93,9 +93,9 @@ class TabMap extends React.Component {
                     })}
                 /></div>
                 {this.state.question!=="" && <div className="mapQuestion">
-                        {this.state.question}
-                        <input className="answerInput" onChange={this.typeAnswer}/>
-                        <Button color="blue" type="submit" label="submit" onClick={this.submitAnswer}/>
+                        <Text className="questionMap">{this.state.question}</Text>
+                        <TextInput className="answerInput" placeholder="type here" onChange={this.typeAnswer}/>
+                        <Button className="submitMap" color="blue" type="submit" label="submit" onClick={this.submitAnswer}/>
                     </div>
                 }
                 <Button color="transparent" alignSelf="center" label="Remove selection" onClick={this.removePlace} />
