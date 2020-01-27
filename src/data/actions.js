@@ -1,5 +1,6 @@
 export const ADD_POINTS = "ADD_POINTS";
 export const REMOVE_POINTS = "REMOVE_POINTS";
+export const USE_MONEY = "USE_MONEY";
 export const LOADING = "LOADING";
 export const GET_CURRENCY = "GET_CURRENCY";
 export const CURRENCY = "CURRENCY";
@@ -18,6 +19,12 @@ export const removePoints = (points,pointsType) => {
     return {
         type: REMOVE_POINTS,
         payload: [points,pointsType]
+    }
+}
+
+export const useMoney = () => {
+    return {
+        type: USE_MONEY
     }
 }
 

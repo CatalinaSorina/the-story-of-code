@@ -27,6 +27,12 @@ const rootReducer = (state = initialState, action) => {
                 pointsType: [...state.pointsType,action.payload[1]],
                 money: (state.points-action.payload[0])*state.currency
             }
+        case actions.USE_MONEY:
+            return{
+                ...state,
+                points: 0,
+                money: 0
+            }
         case actions.LOADING:
             return{
                 ...state,

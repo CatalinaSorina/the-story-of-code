@@ -116,7 +116,7 @@ class TabMap extends React.Component {
                 <ShowPoints showPoints={this.state.showPoints} 
                     onClose={()=>this.setState({showPoints:false})}
                     alertStyle={this.state.alertStyle}
-                    points={this.state.points}
+                    points={this.props.points}
                     questionPoints={this.state.questionPoints}
                 />
             </Box>
