@@ -44,7 +44,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 currencyType: action.payload.split("_")[1]
             }
-        case actions.CURRENCY:
+        case actions.SET_CURRENCY:
             return{
                 ...state,
                 loading: false,

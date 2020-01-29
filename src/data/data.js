@@ -187,5 +187,64 @@ export default {
             ],
             correctAnswer: "Run"
         }
+    ],
+
+    results: [
+        {//HAHAH|||DON'T READ HERE SMART ASS|||HAHAH\\
+            wrong:`Something's wrong... play again.`
+        },{
+            minus:`Play ... more`
+        },{
+            minus2:`You need ... to study.`
+        },{
+            minusOnePage:`You tried to win but you lost money.
+            You did not discover more paths to make money.
+            Play more around.`
+        },{
+            plus:`You used your money pretty fast.
+            You seem smart
+            but ... play more`
+        },{
+            plus2:`Pretty nice dude, you seem smart.
+            Or you may have luck.
+            Anyway you can play more to discover the ULTIMATE STORY.`
+        },{
+            plusOnePage:`You are close to ULTIMATE STORY.
+            Yet you did not discover more paths.
+            Play more around.
+            Have poor luck but a smart head!`
+        },{
+            ultimateResult:`╔═.♥. ═════ULTIMATE STORY═════════╗  
+            You are FUNNY and SMART and LUCKY.
+            You may have lost, or just win points
+            but you still earned enough MONEY.
+            You played enough this game.
+            Write the author if you have more ideas.
+            Have a great day!  
+            ╚══════.♥. ════════════════════╝  
+            ───▄▄▄▄▄▄─────▄▄▄▄▄▄───
+    
+            ─▄█▓▓▓▓▓▓█▄─▄█▓▓▓▓▓▓█▄─
+    
+            ▐█▓▓▒▒▒▒▒▓▓█▓▓▒▒▒▒▒▓▓█▌  
+    
+            █▓▓▒▒░╔╗╔═╦═╦═╦═╗░▒▒▓▓█  
+    
+            █▓▓▒▒░║╠╣╬╠╗║╔╣╩╣░▒▒▓▓█
+    
+            ▐█▓▓▒▒╚═╩═╝╚═╝╚═╝▒▒▓▓█▌
+    
+            ─▀█▓▓▒▒░░░░░░░░░▒▒▓▓█▀─
+    
+            ───▀█▓▓▒▒░░░░░▒▒▓▓█▀───
+    
+            ─────▀█▓▓▒▒░▒▒▓▓█▀─────
+    
+            ──────▀█▓▓▒▓▓█▀──────
+    
+            ────────▀█▓█▀────────
+    
+            ──────────▀──────────`
+        }
     ]
 }
