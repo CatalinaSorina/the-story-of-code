@@ -1,13 +1,13 @@
 import { put, call, takeEvery } from "redux-saga/effects";
 import * as actions from "./actions";
-import * as API from "./api";
+import * as utils from "./utils";
 
 export function* changeCurrency(action) {
     try {
         yield put(actions.loading());
         const currencyType=action.payload;
         const { data } = yield call(
-            API.getResponseFromApi,
+            utils.getResponseFromApi,
           `https://free.currconv.com/api/v7/convert?q=${currencyType}&compact=ultra&apiKey=2a31c224ca2988d34341`
         );
         yield put(actions.currencyVal(Object.values(data)[0]));
@@ -22,7 +22,7 @@ export function* getLocation(action) {
       const coordinates=action.payload;
       if(coordinates!==0){
         const { data } = yield call(
-          API.getResponseFromApi,
+          utils.getResponseFromApi,
           `https://api.opencagedata.com/geocode/v1/json?key=33b2739dd8d64aa9bf5eeec12d5864da&q=${coordinates}`
         );
         // console.log(data.results[0].components.country,data.results[0].components.continent)
