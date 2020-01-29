@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { WorldMap,Box,Button,TextInput,Text } from "grommet";
-import * as utils from "../data/utils";
+import { getContinents,checkMapQuestion } from "../data/utils";
 import { addPoints,removePoints,makeLocation,removeSelectedArea,changeSelectedName,disableQuestion } from "../data/actions";
 import { useSelector,useDispatch } from "react-redux";
 import ShowPoints from "./ShowPoints";
@@ -20,7 +20,7 @@ const TabMap = () => {
     const dispatch=useDispatch();
     
     useEffect(() => {
-        setContinents(utils.getContinents());
+        setContinents(getContinents());
     },[]);
 
     const removePlace = () => dispatch(removeSelectedArea());
@@ -34,7 +34,7 @@ const TabMap = () => {
 
     const submitAnswer = () => {
         const codeName=question.split("I'm ")[1].split(",")[0];
-        const questionPoints=utils.checkMapQuestion(codeName,answer);
+        const questionPoints=checkMapQuestion(codeName,answer);
         dispatch(questionPoints>0? addPoints(questionPoints,"map"):removePoints((questionPoints*(-1)),"map"));
         dispatch(disableQuestion(codeName));
         //===SHOW RESULT===\\

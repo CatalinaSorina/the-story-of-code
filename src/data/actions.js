@@ -10,6 +10,8 @@ export const CHANGE_SELECTED_NAME = "CHANGE_SELECTED_NAME";
 export const REMOVE_SELECTED_AREA = "REMOVE_SELECTED_AREA";
 export const DISABLE_MAP_QUESTION = "DISABLE_MAP_QUESTION";
 
+export const CHANGE_CHALLENGE_NUMBER = "CHANGE_CHALLENGE_NUMBER";
+
 export const GET_CURRENCY = "GET_CURRENCY";
 export const SET_CURRENCY = "SET_CURRENCY";
 export const USE_MONEY = "USE_MONEY";
@@ -56,6 +58,12 @@ export const disableQuestion = name => ({
     type: DISABLE_MAP_QUESTION,
     payload: name
 });
+
+//===CHALLENGE PAGE===\\
+export const changeNumber = number => ({
+    type: CHANGE_CHALLENGE_NUMBER,
+    payload: number
+})
 
 //===RESULT PAGE===\\
 export const getCurrencyVal = currencyType => ({

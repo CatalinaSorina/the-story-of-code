@@ -11,7 +11,8 @@ const initialState = {
     error:null,
     places:getPlaces(),
     selectedArea:null,
-    mapQuestionsDisabled:[]
+    mapQuestionsDisabled:[],
+    challengeQuestionNumber:0
 };
   
 const rootReducer = (state = initialState, action) => {
@@ -100,6 +101,11 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 selectedArea: action.payload
+            }
+        case actions.CHANGE_CHALLENGE_NUMBER:
+            return{
+                ...state,
+                challengeQuestionNumber: action.payload
             }
         case actions.ERROR_MESSAGE:
             return{

@@ -27,6 +27,13 @@ export const checkMapQuestion = (codeName,answer) => {
 
 export const shuffle = array => array.map(index => [Math.random(), index]).sort(([a], [b]) => a - b).map(([_, index]) => index);
 
+export const getQuestion = number => {
+    const questionNumber=data.questions[number];
+    return {...questionNumber,answers:shuffle(questionNumber.answers)}
+}
+
+export const checkNumber = number => number<(data.questions.length-1)
+
 export const getResult = (money,pointsMap,pointsChallenge) => {
     let resultStory=``;
     if(money>0){
