@@ -7,6 +7,24 @@ export const getContinents = () => data.continents;
 
 export const getPlaces = () => data.places;
 
+export const checkMapQuestion = (codeName,answer) => {
+    //===CHANGE IF HTML+CSS (SAME LOCATION)===\\
+    if(codeName==="HTML+CSS") codeName="HTML";
+    //===CHECK ANSWER===\\
+    let points=0;
+    data.codeLanguage.forEach(codeType=>{
+        if(codeName===codeType.code){
+            switch(answer.toUpperCase()){
+                case codeType.town.toUpperCase(): points=10; break;
+                case codeType.state.toUpperCase(): points=5; break;
+                case codeType.region.toUpperCase(): points=1; break;
+                default: points=-5;
+            }
+        }
+    });
+    return points;
+}
+
 export const shuffle = array => array.map(index => [Math.random(), index]).sort(([a], [b]) => a - b).map(([_, index]) => index);
 
 export const getResult = (money,pointsMap,pointsChallenge) => {

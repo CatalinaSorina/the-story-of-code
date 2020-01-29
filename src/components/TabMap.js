@@ -1,129 +1,85 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { WorldMap,Box,Button,TextInput,Text } from "grommet";
-import data from "../data/data";
-import { addPoints,removePoints,makeLocation } from "../data/actions";
-import { connect } from "react-redux";
+import * as utils from "../data/utils";
+import { addPoints,removePoints,makeLocation,removeSelectedArea,changeSelectedName,disableQuestion } from "../data/actions";
+import { useSelector,useDispatch } from "react-redux";
 import ShowPoints from "./ShowPoints";
 import "./TabMap.css";
 
-class TabMap extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={
-            continents:[],
-            places:[],
-            question:"",
-            answer:"",
-            points:0,
-            questionPoints:0,
-            showPoints:false,
-            alertStyle:"info"
-        };
-    }
+const TabMap = () => {
+    const [continents,setContinents]=useState([]);
+    const places=useSelector(state=>state.places);
+    const [question,setQuestion]=useState('');
+    const [questionPoints,setQuestionPoints]=useState(0);
+    const [answer,setAnswer]=useState('');
+    const [showPoints,setShowPoints]=useState(false);
+    const [alertStyle,setAlertStyle]=useState('info');
+    const points=useSelector(state=>state.points);
+    const selectedArea=useSelector(state=>state.selectedArea);
+    const mapQuestionsDisabled=useSelector(state=>state.mapQuestionsDisabled);
+    const dispatch=useDispatch();
     
-    componentDidMount = () => this.setState({continents:data.continents,places:data.places});
+    useEffect(() => {
+        setContinents(utils.getContinents());
+    },[]);
 
-    removePlace = () => {
-        let places=this.state.places.filter(place=>place.name!=="Selected area");
-        this.setState({places:places,question:"",selectedArea:""});
-        this.props.makeLocation(0);
+    const removePlace = () => dispatch(removeSelectedArea());
+
+    const selectPlace = (coordinates) => {
+        dispatch(makeLocation(coordinates));
+        setQuestion('');
     }
 
-    selectPlace = (coordinates) => {
-        let places=this.state.places;
-        places[places.length-1].name==="Selected area"?places[places.length-1].location=coordinates:places.push({
-            name:"Selected area",
-            location:coordinates,
-            color:"blue"
-        });
-        this.props.makeLocation(coordinates);
-        this.setState({places:places,question:""});
-    }
+    const typeAnswer = e => setAnswer(e.target.value);
 
-    typeAnswer = e => this.setState({answer:e.target.value});
-
-    submitAnswer = () => {
-        //===GET CODE NAME FROM QUESTION===\\
-        let codeName=this.state.question.split("I'm ")[1].split(",")[0];
-        //===CHANGE IF HTML+CSS (SAME LOCATION)===\\
-        if(codeName==="HTML+CSS") codeName="HTML";
-        //===SET VARIABLES===\\
-        let points=this.state.points;
-        let questionPoints;
-        let answerUpper=this.state.answer.toUpperCase();
-        let alertStyle="info";
-        const pagePointsType="map";
-        const correct="success";
-        const incorrect="error";
-        //===CHECK ANSWER===\\
-        data.codeLanguage.map(codeType=>{
-            if(codeName===codeType.code){
-                if(answerUpper===codeType.town.toUpperCase()){
-                    points+=10;
-                    questionPoints=10;
-                    alertStyle=correct;
-                    this.props.addPoints(10,pagePointsType);
-                }else if(answerUpper===codeType.state.toUpperCase()){
-                    points+=5;
-                    questionPoints=5;
-                    alertStyle=correct;
-                    this.props.addPoints(5,pagePointsType);
-                }else if(answerUpper===codeType.region.toUpperCase()){
-                    points+=1;
-                    questionPoints=1;
-                    alertStyle=correct;
-                    this.props.addPoints(1,pagePointsType);
-                }else{
-                    points-=5;
-                    questionPoints=-5;
-                    alertStyle=incorrect;
-                    this.props.removePoints(5,pagePointsType);
-                }
-            }
-            return points;
-        });
+    const submitAnswer = () => {
+        const codeName=question.split("I'm ")[1].split(",")[0];
+        const questionPoints=utils.checkMapQuestion(codeName,answer);
+        dispatch(questionPoints>0? addPoints(questionPoints,"map"):removePoints((questionPoints*(-1)),"map"));
+        dispatch(disableQuestion(codeName));
         //===SHOW RESULT===\\
-        this.setState({question:"",points:points,questionPoints:questionPoints,showPoints:true,alertStyle:alertStyle});
+        setQuestion('');
+        setQuestionPoints(questionPoints);
+        setShowPoints(true);
+        setAlertStyle(questionPoints>0?"success":(questionPoints===0?"info":"error"));
     }
 
-    placeAction = placeName => {
-        this.removePlace();
-        this.setState({question:`I'm ${placeName}, where was I born?`});
+    const placeAction = placeName => {
+        removePlace();
+        mapQuestionsDisabled.includes(placeName)? setQuestion(''):setQuestion(`I'm ${placeName}, where was I born?`);
     }
 
-    render(){
-        const places=this.state.places;
-        return (
-            <Box margin='small' pad='small' alignContent="center">
-                <div className="mapHolder"><WorldMap
-                    className="map"
-                    color="rgba(255,255,255,0.1)"
-                    continents={this.state.continents.map(continent=>continent)}
-                    onSelectPlace={this.selectPlace}
-                    places={places.map(place=>{
-                        return {...place,onClick:this.placeAction}
-                    })}
-                /></div>
-                {this.state.question!=="" && <div className="mapQuestion">
-                    <Text className="questionMap">{this.state.question}</Text>
-                    <TextInput className="answerInput" placeholder="type here" onChange={this.typeAnswer}/>
-                    <Button className="submitMap" color="blue" type="submit" label="submit" onClick={this.submitAnswer}/>
-                </div>}
-                {this.props.selectedArea && <>
-                    <Text>{this.props.selectedArea}</Text>
-                    <Button color="transparent" alignSelf="center" label="Remove selection" onClick={this.removePlace} />
-                </>}
-                <ShowPoints showPoints={this.state.showPoints} 
-                    onClose={()=>this.setState({showPoints:false})}
-                    alertStyle={this.state.alertStyle}
-                    points={this.props.points}
-                    questionPoints={this.state.questionPoints}
-                />
-            </Box>
-        )
+    const showName = placeName => {
+        setQuestion('');
+        dispatch(changeSelectedName(placeName));
     }
+
+    return (
+        <Box margin='small' pad='small' alignContent="center">
+            <div className="mapHolder"><WorldMap
+                className="map"
+                color="rgba(255,255,255,0.1)"
+                continents={continents.map(continent=>continent)}
+                onSelectPlace={selectPlace}
+                places={places.map(place=>({...place,onClick:place.color!=="black"?placeAction:showName}))}
+            /></div>
+            {question!=="" && <div className="mapQuestion">
+                <Text className="questionMap">{question}</Text>
+                <TextInput className="answerInput" placeholder="type here" onChange={typeAnswer}/>
+                <Button className="submitMap" color="blue" type="submit" label="submit" onClick={submitAnswer}/>
+            </div>}
+            {selectedArea && <>
+                <Text>{selectedArea}</Text>
+                <Button color="transparent" alignSelf="center" label="Remove selection" onClick={removePlace} />
+            </>}
+            <ShowPoints showPoints={showPoints} 
+                onClose={()=>setShowPoints(false)}
+                alertStyle={alertStyle}
+                points={points}
+                questionPoints={questionPoints}
+            />
+        </Box>
+    )
 }
 
-const mapStateToProps = state => ({points:state.points,selectedArea:state.selectedArea});
-
-export default connect(mapStateToProps,{addPoints,removePoints,makeLocation})(TabMap);
+export default TabMap;

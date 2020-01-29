@@ -6,6 +6,9 @@ export const ERROR_MESSAGE = "ERROR_MESSAGE";
 
 export const GET_LOCATION = "GET_LOCATION";
 export const SET_SELECTED_AREA = "SET_SELECTED_AREA";
+export const CHANGE_SELECTED_NAME = "CHANGE_SELECTED_NAME";
+export const REMOVE_SELECTED_AREA = "REMOVE_SELECTED_AREA";
+export const DISABLE_MAP_QUESTION = "DISABLE_MAP_QUESTION";
 
 export const GET_CURRENCY = "GET_CURRENCY";
 export const SET_CURRENCY = "SET_CURRENCY";
@@ -40,6 +43,18 @@ export const makeLocation = coordinates => ({
 export const setSelectedArea = location => ({
     type: SET_SELECTED_AREA,
     payload: location
+});
+
+export const changeSelectedName = name => ({
+    type: CHANGE_SELECTED_NAME,
+    payload: name
+});
+
+export const removeSelectedArea = () => ({type: REMOVE_SELECTED_AREA});
+
+export const disableQuestion = name => ({
+    type: DISABLE_MAP_QUESTION,
+    payload: name
 });
 
 //===RESULT PAGE===\\
