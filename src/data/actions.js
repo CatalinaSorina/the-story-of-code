@@ -8,63 +8,41 @@ export const GET_LOCATION = "GET_LOCATION";
 export const SET_SELECTED_AREA = "SET_SELECTED_AREA";
 export const ERROR_MESSAGE = "ERROR_MESSAGE";
 
-export const addPoints = (points,pointsType) => {
-    return {
-        type: ADD_POINTS,
-        payload: [points,pointsType]
-    }
-}
+export const addPoints = (points,pointsType) => ({
+    type: ADD_POINTS,
+    payload: [points,pointsType]
+});
 
-export const removePoints = (points,pointsType) => {
-    return {
-        type: REMOVE_POINTS,
-        payload: [points,pointsType]
-    }
-}
+export const removePoints = (points,pointsType) => ({
+    type: REMOVE_POINTS,
+    payload: [points,pointsType]
+});
 
-export const useMoney = () => {
-    return {
-        type: USE_MONEY
-    }
-}
+export const useMoney = () => ({type: USE_MONEY});
 
-export const loading = () => {
-    return {
-        type: LOADING
-    }
-}
+export const loading = () => ({type: LOADING});
 
-export const getCurrencyVal = currencyType => {
-    return {
-        type: GET_CURRENCY,
-        payload: currencyType
-    }
-}
+export const getCurrencyVal = currencyType => ({
+    type: GET_CURRENCY,
+    payload: currencyType
+});
 
-export const currencyVal = val => {
-    return {
-        type: CURRENCY,
-        payload: val
-    }
-}
+export const currencyVal = val => ({
+    type: CURRENCY,
+    payload: val
+});
 
-export const makeLocation = coordinates => {
-    return {
-        type: GET_LOCATION,
-        payload: coordinates
-    }
-}
+export const makeLocation = coordinates => ({
+    type: GET_LOCATION,
+    payload: coordinates
+});
 
-export const setSelectedArea = location => {
-    return {
-        type: SET_SELECTED_AREA,
-        payload: location
-    }
-}
+export const setSelectedArea = location => ({
+    type: SET_SELECTED_AREA,
+    payload: location
+});
 
-export const errorMessage = errMsg => {
-    return {
-      type: ERROR_MESSAGE,
-      payload: errMsg
-    };
-};
+export const errorMessage = errMsg => ({
+    type: ERROR_MESSAGE,
+    payload: errMsg
+});
