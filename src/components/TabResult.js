@@ -26,12 +26,10 @@ const TabResult = () => {
     const getDecimals = num => num % 1 === 0? num:num.toFixed(2);
 
     const resetMoney = () => {
-        let resultStory;
         const numberMap=pointsType.filter(type=>type==="map").length;
         const numberChallenge=pointsType.filter(type=>type==="challenge").length;
-        utils.getResult(money,numberMap,numberChallenge);
         dispatch({type:actions.USE_MONEY});
-        setResult(resultStory);
+        setResult(utils.getResult(money,numberMap,numberChallenge));
     }
 
     return(
