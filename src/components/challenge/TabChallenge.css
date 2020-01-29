@@ -1,53 +1,53 @@
 .challenge {
-    color:white;
-    width:50vw;
-    padding:1rem;
-    margin:2rem;
-    border-radius: 1rem;
-    background:rgba(110, 110, 110, 0.4);
-    font-family: 'Itim', cursive;
-    font-weight: lighter;
-    font-size: 1.5rem;
+  color: white;
+  width: 50vw;
+  padding: 1rem;
+  margin: 2rem;
+  border-radius: 1rem;
+  background: rgba(110, 110, 110, 0.4);
+  font-family: "Itim", cursive;
+  font-weight: lighter;
+  font-size: 1.5rem;
 }
 
 .question {
-    margin:1.5rem;
-    font-family: 'Julius Sans One', sans-serif;
-    font-weight: normal;
+  margin: 1.5rem;
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: normal;
 }
 
 @media only screen and (max-width: 500px) {
-    .challenge {
-        width:90vw;
-        padding:0.4rem;
-        margin:0.2rem;
-        font-family: 'Raleway', sans-serif;
-        font-size:0.8rem;
-    }
-    .question {
-        font-family:'Itim', cursive;
-        font-size:1rem;
-    }
+  .challenge {
+    width: 90vw;
+    padding: 0.4rem;
+    margin: 0.2rem;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.8rem;
+  }
+  .question {
+    font-family: "Itim", cursive;
+    font-size: 1rem;
+  }
 }
 
 .success {
-    background:rgba(35, 99, 38,0.4);
+  background: rgba(35, 99, 38, 0.4);
 }
 
 .error {
-    background:rgba(124, 23, 23,0.4);
+  background: rgba(124, 23, 23, 0.4);
 }
 
 .submitButton {
-    color:white;
-    margin:1rem;
+  color: white;
+  margin: 1rem;
 }
 
 .submitButton:focus {
-    border-color: inherit;
-    box-shadow: none;
+  border-color: inherit;
+  box-shadow: none;
 }
 
 .submitButton:active {
-    background-color: rgb(202, 173, 44);
+  background-color: rgb(202, 173, 44);
 }

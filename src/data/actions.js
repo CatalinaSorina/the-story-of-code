@@ -16,64 +16,65 @@ export const GET_CURRENCY = "GET_CURRENCY";
 export const SET_CURRENCY = "SET_CURRENCY";
 export const USE_MONEY = "USE_MONEY";
 
-
 //===POINTS===\\
-export const addPoints = (points,pointsType) => ({
-    type: ADD_POINTS,
-    payload: [points,pointsType]
+export const addPoints = (points, pointsType) => ({
+  type: ADD_POINTS,
+  payload: [points, pointsType]
 });
 
-export const removePoints = (points,pointsType) => ({
-    type: REMOVE_POINTS,
-    payload: [points,pointsType]
+export const removePoints = (points, pointsType) => ({
+  type: REMOVE_POINTS,
+  payload: [points, pointsType]
 });
 
 //===SYNC===\\
-export const loading = () => ({type: LOADING});
+export const loading = () => ({ type: LOADING });
 
 export const errorMessage = errMsg => ({
-    type: ERROR_MESSAGE,
-    payload: errMsg
+  type: ERROR_MESSAGE,
+  payload: errMsg
 });
 
 //===MAP PAGE===\\
 export const makeLocation = coordinates => ({
-    type: GET_LOCATION,
-    payload: coordinates
+  type: GET_LOCATION,
+  payload: coordinates
 });
 
 export const setSelectedArea = location => ({
-    type: SET_SELECTED_AREA,
-    payload: location
+  type: SET_SELECTED_AREA,
+  payload: location
 });
 
 export const changeSelectedName = name => ({
-    type: CHANGE_SELECTED_NAME,
-    payload: name
+  type: CHANGE_SELECTED_NAME,
+  payload: name
 });
 
-export const removeSelectedArea = () => ({type: REMOVE_SELECTED_AREA});
+export const removeSelectedArea = () => ({ type: REMOVE_SELECTED_AREA });
 
 export const disableQuestion = name => ({
-    type: DISABLE_MAP_QUESTION,
-    payload: name
+  type: DISABLE_MAP_QUESTION,
+  payload: name
 });
 
 //===CHALLENGE PAGE===\\
 export const changeNumber = number => ({
-    type: CHANGE_CHALLENGE_NUMBER,
-    payload: number
-})
+  type: CHANGE_CHALLENGE_NUMBER,
+  payload: number
+});
 
 //===RESULT PAGE===\\
 export const getCurrencyVal = currencyType => ({
-    type: GET_CURRENCY,
-    payload: currencyType
+  type: GET_CURRENCY,
+  payload: currencyType
 });
 
 export const setCurrencyVal = val => ({
-    type: SET_CURRENCY,
-    payload: val
+  type: SET_CURRENCY,
+  payload: val
 });
 
-export const useMoney = () => ({type: USE_MONEY});
+export const useMoney = () => ({
+  type: USE_MONEY
+});
