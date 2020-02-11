@@ -7,7 +7,8 @@ import {
   makeLocation,
   removeSelectedArea,
   changeSelectedName,
-  disableQuestion
+  disableQuestion,
+  getPlacesFromRedux
 } from "../data/actions";
 import { useSelector, useDispatch } from "react-redux";
 import ShowPoints from "./ShowPoints";
@@ -25,11 +26,13 @@ const TabMap = () => {
   const selectedArea = useSelector(state => state.selectedArea);
   const mapQuestionsDisabled = useSelector(state => state.mapQuestionsDisabled);
   const dispatch = useDispatch();
-  //   console.log("Tab map:", places);
 
   useEffect(() => {
     setContinents(getContinents());
+    getPlaces();
   }, []);
+
+  const getPlaces = () => !places && dispatch(getPlacesFromRedux());
 
   const removePlace = () => dispatch(removeSelectedArea());
 
@@ -80,7 +83,7 @@ const TabMap = () => {
           onSelectPlace={selectPlace}
           places={places.map(place => ({
             ...place,
-            onClick: place.color !== "black" ? placeAction : showName
+            onClick: place.color !== "white" ? placeAction : showName
           }))}
         />
       </div>
@@ -119,6 +122,7 @@ const TabMap = () => {
         points={points}
         questionPoints={questionPoints}
       />
+      {places.length === 0 && <Button alignSelf="center" onClick={() => dispatch(getPlacesFromRedux())}>discover</Button>}
     </Box>
   );
 };

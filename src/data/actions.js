@@ -4,6 +4,7 @@ export const REMOVE_POINTS = "REMOVE_POINTS";
 export const LOADING = "LOADING";
 export const ERROR_MESSAGE = "ERROR_MESSAGE";
 
+export const GET_PLACES = "GET_PLACES";
 export const GET_LOCATION = "GET_LOCATION";
 export const SET_SELECTED_AREA = "SET_SELECTED_AREA";
 export const CHANGE_SELECTED_NAME = "CHANGE_SELECTED_NAME";
@@ -36,6 +37,8 @@ export const errorMessage = errMsg => ({
 });
 
 //===MAP PAGE===\\
+export const getPlacesFromRedux = () => ({ type: GET_PLACES });
+
 export const makeLocation = coordinates => ({
   type: GET_LOCATION,
   payload: coordinates

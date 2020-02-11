@@ -5,10 +5,7 @@ export const getResponseFromApi = async api => axios.get(api);
 
 export const getContinents = () => data.continents;
 
-export const getPlaces = () => {
-  console.log("UTILS", data.places);
-  return data.places;
-};
+export const getPlaces = () => data.places;
 
 export const checkMapQuestion = (codeName, answer) => {
   //===CHANGE IF HTML+CSS (SAME LOCATION)===\\
