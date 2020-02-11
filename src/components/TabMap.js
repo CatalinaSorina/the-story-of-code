@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { WorldMap, Box, Button, TextInput, Text } from "grommet";
 import { getContinents, checkMapQuestion } from "../data/utils";
 import {
@@ -27,12 +27,13 @@ const TabMap = () => {
   const mapQuestionsDisabled = useSelector(state => state.mapQuestionsDisabled);
   const dispatch = useDispatch();
 
+  const callbackPlaces = useCallback(() => !places && dispatch(getPlacesFromRedux()), [dispatch, places]);
+
   useEffect(() => {
     setContinents(getContinents());
-    getPlaces();
-  }, []);
+    callbackPlaces();
+  }, [callbackPlaces]);
 
-  const getPlaces = () => !places && dispatch(getPlacesFromRedux());
 
   const removePlace = () => dispatch(removeSelectedArea());
 
