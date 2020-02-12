@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Button, TextInput, Text } from "grommet";
-import { useDispatch } from "react-redux";
 import { checkMapQuestion } from "../../data/utils";
 import { addPoints, removePoints, disableQuestion } from "../../data/actions";
 
-const MapQuestion = ({ question,setQuestion,setQuestionPoints,setShowPoints,setAlertStyle }) => {
+const MapQuestion = ({ question, dispatch, setQuestion, setQuestionPoints, setShowPoints, setAlertStyle }) => {
     const [answer, setAnswer] = useState("");
-    const dispatch = useDispatch();
 
     const typeAnswer = e => setAnswer(e.target.value);
 

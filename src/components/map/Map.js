@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { WorldMap } from "grommet";
 import { getContinents } from "../../data/utils";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { makeLocation, changeSelectedName, getPlacesFromRedux } from "../../data/actions";
-import "./../TabMap.css";
 
-const Map = ({ places, changeQuestion, removePlace }) => {
+const Map = ({ places, dispatch, changeQuestion, removePlace }) => {
     const mapQuestionsDisabled = useSelector(state => state.mapQuestionsDisabled);
     const [continents, setContinents] = useState([]);
-    const dispatch = useDispatch();
 
     const callbackPlaces = useCallback(() => !places && dispatch(getPlacesFromRedux()), [dispatch, places]);
 
